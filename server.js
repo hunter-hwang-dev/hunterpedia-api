@@ -1,5 +1,8 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+const express = require("express");
+const server = express();
+
+const { initializeApp } = require("firebase/app");
+//const { getAnalytics } = require("firebase/analytics");
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 require("dotenv").config();
@@ -16,12 +19,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebaseApp);
+//const analytics = getAnalytics(firebaseApp);
 
 //------------------------------------------------------------
-
-import express from "express";
-const server = express();
 
 server.use(express.static(__dirname + "/public")); //static - public 폴더 등록
 
