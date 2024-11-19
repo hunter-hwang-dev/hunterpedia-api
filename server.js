@@ -1,32 +1,38 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {};
+require("dotenv").config();
+
+const firebaseConfig = {
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID,
+};
 
 // Initialize Firebase
-const fbApp = initializeApp(firebaseConfig);
-const analytics = getAnalytics(fbApp);
+const firebaseApp = initializeApp(firebaseConfig);
+const analytics = getAnalytics(firebaseApp);
 
 //------------------------------------------------------------
 
 import express from "express";
-const app = express();
+const server = express();
 
-app.use(express.static(__dirname + "/public")); //static - public 폴더 등록
+server.use(express.static(__dirname + "/public")); //static - public 폴더 등록
 
-app.listen(8080, () => {
+server.listen(8080, () => {
   console.log("http://localhost:8080");
 });
 
-app.get("/", (req, res) => {
+server.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/login", (req, res) => {
+server.get("/login", (req, res) => {
   res.send("로그인 페이지");
 });
